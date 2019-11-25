@@ -11,10 +11,13 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
-        TaskHandler taskH = new TaskHandler("C:\\Users\\nitsa\\Desktop\\Files for University Assignments\\names.csv");
+        TaskHandler taskH = new TaskHandler("C:\\Users\\nitsa\\Desktop\\Files for University Assignments\\names_sorted.csv");
 //        TaskHandler taskH = new TaskHandler("names.csv");  // somehow load it from src, i don't know how
-        taskH.countSpecificString("N");
+//        taskH.countSpecificString("N");
         taskH.countAllStrings(1);
+        System.out.println(taskH.generateName());
+
+
     }
 
 
