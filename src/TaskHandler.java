@@ -120,10 +120,60 @@ public class TaskHandler {
     public String generateName(){
         String generatedName = "";
         generatedName = generatedName + findMostOccurdCapitalLetter();
-        // NEED TO IMPLEMENT 
+        int index = 1;
+        while(index < 6){
+            char nameLastChar = generatedName.charAt(generatedName.length() - 1);
+            char nextChar = findNextChar(nameLastChar);
+            String newGeneratedName = generatedName + nextChar;
+//            if(newGeneratedName.equals(generatedName)){
+//                generatedName = newGeneratedName;
+//                return generatedName;
+//            }
+            index++;
+            generatedName = newGeneratedName;
+        }
         return generatedName;
     }
 
+    /**
+     * Returns the char with most appearances after given substring.
+     * @param givenChar
+     * @return character
+     */
+    private char findNextChar(char givenChar){
+        char[] allPossibleChars = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+                'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+                'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
+        int[] allPossibleCharsCounters = new int[53];
+        int totalEncounters = 0;    // Number of encounters of givenChar
+        int lastCharEncounters = 0; // Number of encounter givenChar was last char of a name.
+        for(String name : this.names){
+            for(int i=1; i < name.length(); i++){
+                char alpha = name.charAt(i);
+                if(name.charAt(i-1) == givenChar){
+                    totalEncounters++;
+                    int currentCharIndex = indexOf(allPossibleChars, alpha);
+                    allPossibleCharsCounters[currentCharIndex] = allPossibleCharsCounters[currentCharIndex] + 1;
+                }
+                if((i == name.length() - 1) && (name.charAt(i) == givenChar)){
+                    lastCharEncounters++;
+                }
+            }
+        }
+        float prob = (float)lastCharEncounters / (float)totalEncounters;
+        if(prob > 0.5){
+            return Character.MIN_VALUE;
+        }
+        int maxCounter = 0;
+        int maxIndex = 0;
+        for(int i=0; i < allPossibleCharsCounters.length; i++){
+            if(allPossibleCharsCounters[i] > maxCounter){
+                maxIndex = i;
+                maxCounter = allPossibleCharsCounters[i];
+            }
+        }
+        return allPossibleChars[maxIndex];
+    }
 
     private String findMostOccurdCapitalLetter(){
         String[] alphaUpperCase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
