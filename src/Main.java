@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         TaskHandler taskH = new TaskHandler("C:\\Users\\nitsa\\Desktop\\Files for University Assignments\\names_set.csv");
 //        TaskHandler taskH = new TaskHandler("names.csv");  // somehow load it from src, i don't know how
-//        taskH.countSpecificString("N");
-        taskH.countAllStrings(1);
+        taskH.countSpecificString("N");
+        taskH.countAllStrings(2);
         System.out.println(taskH.generateName());
 
 

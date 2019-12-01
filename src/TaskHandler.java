@@ -73,6 +73,10 @@ public class TaskHandler {
         return count;
     }
 
+    /**
+     * Counts and prints the appearances of each substring in length: length
+     * @param length - the length of the substring.
+     */
     public void countAllStrings(int length){
         Map<String, Integer> substringToCountMap = new HashMap<>();
         for(String name: this.names){
@@ -96,6 +100,49 @@ public class TaskHandler {
     public int allIncludesString(String aString){
         return -1;
     }
+
+
+    private int indexOf(char[] aCharArray, char aChar){
+        for(int i = 0; i < aCharArray.length; i++){
+            if(aCharArray[i] == aChar){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     * Generates name according to each letters conditional probability.
+     * Conditional probability according to previous char.
+     * @return generated name.
+     */
+    public String generateName(){
+        String generatedName = "";
+        generatedName = generatedName + findMostOccurdCapitalLetter();
+        // NEED TO IMPLEMENT 
+        return generatedName;
+    }
+
+
+    private String findMostOccurdCapitalLetter(){
+        String[] alphaUpperCase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
+                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        int max_count = 0;
+        String max_string = "";
+        for(String alpha : alphaUpperCase){
+            int current_count = countSpecificString(alpha);
+            if(current_count > max_count){
+                max_count = current_count;
+                max_string = alpha;
+            }
+
+        }
+        return max_string;
+    }
+    /*
+
+    If generation of name would use conditional probability over prefix and not one char.
 
     public String generateName(){
         String generatedName = "";
@@ -149,15 +196,6 @@ public class TaskHandler {
         return subString;
     }
 
-    private int indexOf(char[] aCharArray, char aChar){
-        for(int i = 0; i < aCharArray.length; i++){
-            if(aCharArray[i] == aChar){
-                return i;
-            }
-        }
-        return -1;
-    }
-
     private String findMostOccurdCapitalLetter(){
         String[] alphaUpperCase = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
                 "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
@@ -174,7 +212,7 @@ public class TaskHandler {
         return max_string;
     }
 
-
+*/
 
 
 }
