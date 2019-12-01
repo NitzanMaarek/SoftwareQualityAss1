@@ -30,7 +30,7 @@ public class TaskHandler {
     }
 
     private String removeSignFromString(String aString){
-        String[] signs = {" ", "[", "]", "'", "\""};
+        String[] signs = {"[", "]", "'", "\""};
         StringBuilder sb = new StringBuilder(aString);
         for(String sign : signs){
             if(aString.contains(sign)){
