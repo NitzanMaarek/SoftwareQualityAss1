@@ -9,14 +9,14 @@ public class TaskHandler {
     private ArrayList<String> names;
 
     public TaskHandler(String path){
-        names = new ArrayList<>();
+        this.names = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String new_line = "";
             while ((new_line = br.readLine()) != null) {
                 String[] values = new_line.split(",");
                 for(String value : values){
                     value = removeSignFromString(value);
-                    names.add(value);
+                    this.names.add(value);
                 }
                 //                data.add(values);
             }
@@ -78,27 +78,51 @@ public class TaskHandler {
      * @param length - the length of the substring.
      */
     public void countAllStrings(int length){
-        Map<String, Integer> substringToCountMap = new HashMap<>();
-        for(String name: this.names){
-            for(int i=0; i + length <= name.length(); i++){
-                String currentSubstring = name.substring(i, i + length);
-                if(substringToCountMap.containsKey(currentSubstring)){
-                    substringToCountMap.put(currentSubstring, substringToCountMap.get(currentSubstring) + 1);
-                }
-                else{
-                    substringToCountMap.put(currentSubstring, 1);
-                }
-            }
-        }
+        Map<String, Integer> substringToCountMap = countStrings(length);
         for(String substring : substringToCountMap.keySet()){
             System.out.println(substring + ":" + substringToCountMap.get(substring).toString());
         }
     }
+
     public int countMaxString(int length){
-        return -1;
+        Map<String, Integer> substringToCountMap = countStrings(length);
+        Integer maxValue = 0;
+        for (Map.Entry<String, Integer> entry : substringToCountMap.entrySet())
+            {
+                if (entry.getValue() > maxValue)
+                {
+                    maxValue = entry.getValue();
+                }
+            }
+        return maxValue;
     }
-    public int allIncludesString(String aString){
-        return -1;
+
+    private Map<String, Integer> countStrings(int length) {
+        Map<String, Integer> substringToCountMap = new HashMap<>();
+        for (String name : this.names) {
+            for (int i = 0; i + length <= name.length(); i++) {
+                String currentSubstring = name.substring(i, i + length);
+                if (substringToCountMap.containsKey(currentSubstring)) {
+                    substringToCountMap.put(currentSubstring, substringToCountMap.get(currentSubstring) + 1);
+                } else {
+                    substringToCountMap.put(currentSubstring, 1);
+                }
+            }
+        }
+        return substringToCountMap;
+    }
+
+    public void allIncludesString(String aString){
+        for (int i = 1; i < aString.length(); i++) {
+            for (int j = 0; j + i <= aString.length(); j++) {
+                String subStr = aString.substring(j, j + i);
+                subStr = Character.toUpperCase(subStr.charAt(0)) + subStr.substring(1, subStr.length());
+                if (this.names.contains(subStr)) {
+                    System.out.println(subStr.toLowerCase());
+                }
+            }
+        }
+
     }
 
 
