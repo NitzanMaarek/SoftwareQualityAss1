@@ -1,7 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import javafx.concurrent.Task;
+
+import java.io.*;
 import java.util.*;
 
 public class TaskHandler {
@@ -10,7 +9,8 @@ public class TaskHandler {
 
     public TaskHandler(String path){
         this.names = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        InputStream resourceStream = ClassLoader.getSystemClassLoader().getResourceAsStream(path);
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(resourceStream))) {
             String new_line = "";
             while ((new_line = br.readLine()) != null) {
                 String[] values = new_line.split(",");
