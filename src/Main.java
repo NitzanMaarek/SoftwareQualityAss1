@@ -108,17 +108,19 @@ public class Main {
             }
         }
 
-        public int countMaxString(int length){
+        public String countMaxString(int length){
             Map<String, Integer> substringToCountMap = countStrings(length);
             Integer maxValue = 0;
+            String maxString = "";
             for (Map.Entry<String, Integer> entry : substringToCountMap.entrySet())
                 {
                     if (entry.getValue() > maxValue)
                     {
                         maxValue = entry.getValue();
+                        maxString = entry.getKey();
                     }
                 }
-            return maxValue;
+            return maxString;
         }
 
         private Map<String, Integer> countStrings(int length) {
