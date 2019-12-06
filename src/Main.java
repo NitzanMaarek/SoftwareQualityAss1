@@ -17,7 +17,10 @@ public class Main {
             taskH.countAllStrings(Integer.valueOf(args[1]));
         }
         else if (args[0].equals("CountMaxString")) {
-            System.out.println(taskH.countMaxString(Integer.valueOf(args[1])));
+            ArrayList<String> maxStrings = taskH.countMaxString(Integer.valueOf(args[1]));
+            for(String string : maxStrings) {
+                System.out.println(string);
+            }
         }
         else if (args[0].equals("AllIncludesString")) {
             taskH.allIncludesString(args[1]);
@@ -108,7 +111,9 @@ public class Main {
             }
         }
 
-        public String countMaxString(int length){
+        public ArrayList<String> countMaxString(int length){
+//            ArrayList<String> maxStrings = new ArrayList<>();
+            Map<Integer, ArrayList<String>> stringCountMap = new HashMap<>();
             Map<String, Integer> substringToCountMap = countStrings(length, false);
             Integer maxValue = 0;
             String maxString = "";
@@ -116,11 +121,14 @@ public class Main {
                 {
                     if (entry.getValue() >= maxValue)
                     {
-                        maxValue = entry.getValue();
                         maxString = entry.getKey();
+                        if (!stringCountMap.containsKey(maxValue)) {
+                            stringCountMap.put(maxValue, new ArrayList<>());
+                        }
+                        stringCountMap.get(maxValue).add(maxString);
                     }
                 }
-            return maxString;
+            return stringCountMap.get(maxValue);
         }
 
         private Map<String, Integer> countStrings(int length, boolean capital) {
