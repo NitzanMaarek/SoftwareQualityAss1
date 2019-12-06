@@ -7,6 +7,7 @@ import java.util.Map;
 public class Main {
 
     public static void main(String[] args) {
+
         TaskHandler taskH = new TaskHandler("names_set.csv");  // somehow load it from src, i don't know how
 
         if (args[0].equals("CountSpecificString")) {
@@ -101,19 +102,19 @@ public class Main {
          * @param length - the length of the substring.
          */
         public void countAllStrings(int length){
-            Map<String, Integer> substringToCountMap = countStrings(length);
+            Map<String, Integer> substringToCountMap = countStrings(length, true);
             for(String substring : substringToCountMap.keySet()){
                 System.out.println(substring + ":" + substringToCountMap.get(substring).toString());
             }
         }
 
         public String countMaxString(int length){
-            Map<String, Integer> substringToCountMap = countStrings(length);
+            Map<String, Integer> substringToCountMap = countStrings(length, false);
             Integer maxValue = 0;
             String maxString = "";
             for (Map.Entry<String, Integer> entry : substringToCountMap.entrySet())
                 {
-                    if (entry.getValue() > maxValue)
+                    if (entry.getValue() >= maxValue)
                     {
                         maxValue = entry.getValue();
                         maxString = entry.getKey();
@@ -122,11 +123,14 @@ public class Main {
             return maxString;
         }
 
-        private Map<String, Integer> countStrings(int length) {
+        private Map<String, Integer> countStrings(int length, boolean capital) {
             Map<String, Integer> substringToCountMap = new HashMap<>();
             for (String name : this.names) {
                 for (int i = 0; i + length <= name.length(); i++) {
                     String currentSubstring = name.substring(i, i + length);
+                    if (!capital) {
+                        currentSubstring = currentSubstring.toLowerCase();
+                    }
                     if (substringToCountMap.containsKey(currentSubstring)) {
                         substringToCountMap.put(currentSubstring, substringToCountMap.get(currentSubstring) + 1);
                     } else {
