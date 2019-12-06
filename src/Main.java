@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
         TaskHandler taskH = new TaskHandler("names_set.csv");  // somehow load it from src, i don't know how
 
-//        Main.TaskHandler taskH = new Main.TaskHandler("C:\\Chen\\BGU\\2020\\2020 - A\\Software Quality\\Assignments\\Assignment 1\\SoftwareQualityAss1\\src\\names_set.csv");
         if (args[0].equals("CountSpecificString")) {
             System.out.println(taskH.countSpecificString(args[1]));
         }
