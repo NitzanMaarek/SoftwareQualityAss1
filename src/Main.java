@@ -121,6 +121,7 @@ public class Main {
                 {
                     if (entry.getValue() >= maxValue)
                     {
+                        maxValue = entry.getValue();
                         maxString = entry.getKey();
                         if (!stringCountMap.containsKey(maxValue)) {
                             stringCountMap.put(maxValue, new ArrayList<>());
