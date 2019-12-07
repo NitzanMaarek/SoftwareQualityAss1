@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TaskHandler taskH = new TaskHandler("names_set.csv");  // somehow load it from src, i don't know how
-
+        TaskHandler taskH = new TaskHandler("names_set.csv");
+        
         if (args[0].equals("CountSpecificString")) {
             System.out.println(taskH.countSpecificString(args[1]));
         }
